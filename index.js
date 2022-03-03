@@ -11,7 +11,7 @@ const connectionOptions = { useUnifiedTopology: true, useNewUrlParser: true, use
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://Valentina:1234@bootcamp.npjeo.mongodb.net/todolist?retryWrites=true&w=majority"
+mongoose.connect("mongodb+srv://Valentina:1234@bootcamp.npjeo.mongodb.net/todolist?retryWrites=true&w=majority", connectionOptions
 
 )
     .then(() => console.log("Connected successfully"))
