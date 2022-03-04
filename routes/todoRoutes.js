@@ -1,32 +1,52 @@
 const router = require("express").Router();
 const Todo = require("../models/Todo");
 
-router.get("/", (req, res) => {
-    Todo.find((err, result) => {
-        if(err) throw new Error(err);
-        res.json(result);
-    });
+router.get("/", async (req, res) => {
+  const result = await Todo.find();
+  try {
+    res.send(result);
+  } 
+	catch (error) {
+    res.status(500).send(error);
+  }
 });
 
-router.post("/", (req, res) => {
-    Todo.create(req.body, (err, result) => {
-        if(err) throw new Error(err);
-        res.json(result);
-    });
+router.post("/",async (req, res) => {
+  try {
+		const todo = Todo(req.body);
+		await todo.create();
+	}
+	catch (error) {
+    res.status(500).send(error);
+  }
 });
 
-router.put("/:id", (req, res) => {
-    Todo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, result) => {
-        if(err) throw new Error(err);
-        res.json(result);
-    });
+router.put("/:id", async (req, res) => {
+	try {
+		const result = await Todo.findOneAndUpdate(
+			{_id: req.params.id},
+			req.body,
+			{new: true},
+  	);
+		res.send(result);
+	}
+	catch (error) {
+    res.status(500).send(error);
+  }
 });
 
-router.delete("/:id", (req, res) => {
-    Todo.findOneAndRemove({ _id: req.params.id }, (err, result) => {
-        if(err) throw new Error(err);
-        res.end();
-    });
+router.delete("/:id", async (req, res) => {
+	try {
+		const result = await Todo.findOneAndUpdate(
+			{_id: req.params.id},
+			req.body,
+			{new: true},
+		);
+		res.send(result);
+	}
+	catch (error) {
+		res.status(500).send(error);
+	}
 });
 
 module.exports = router;
