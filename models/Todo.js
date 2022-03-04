@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
 
-const TodoSchema = new mongoose.Schema({
-  title: String,
-  completed: Boolean,
-});
+//creating schema of the documents
+const TodoSchema = new mongoose.Schema(
+    {
+        title: String,
+        completed: Boolean,
+        deleted: Boolean,
+    },
+    { versionKey: false }
+);
 
-module.exports = mongoose.model("Todo", TodoSchema);
+module.exports = mongoose.model("todo", TodoSchema); 
