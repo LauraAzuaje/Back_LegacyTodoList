@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config({path: "./.env"})
 
-const PORT = 3030;
+const url = process.env.DB_URL;
+const PORT = process.env.DB_PORT;
 const app = express();
 
 const todoRoutes = require("./routes/todoRoutes");
@@ -15,9 +17,10 @@ const connectionOptions = {
 app.use(express.json());
 app.use(cors());
 
+//conneting to a mongo atlas
 mongoose
   .connect(
-    "mongodb+srv://Valentina:1234@bootcamp.npjeo.mongodb.net/todolist?retryWrites=true&w=majority",
+    url,
     connectionOptions
   )
   .then(() => console.log("Connected successfully"))

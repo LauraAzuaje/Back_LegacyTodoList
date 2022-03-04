@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-
+//creating schema of the documents
 const TodoSchema = new mongoose.Schema(
     {
         title: String,
@@ -9,6 +9,5 @@ const TodoSchema = new mongoose.Schema(
     },
     { versionKey: false }
 );
-
 
 module.exports = mongoose.model("todo", TodoSchema); 
